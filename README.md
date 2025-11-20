@@ -4,17 +4,17 @@
   <img src="http://meusite.mackenzie.br/rogerio/mackenzie_logo/UPM.2_horizontal_vermelho.jpg" width="55%">
 </p>
 
-# Projeto Aplicado III  
-## Sistema de Recomendação de Cursos Online (Udemy) — ODS 4 🎓📚  
+# **Projeto Aplicado III**  
+## **Sistema de Recomendação de Cursos Online (Udemy) — ODS 4 🎓📚**  
 **Universidade Presbiteriana Mackenzie — Faculdade de Computação e Informática**  
 **São Paulo — 2025**
 
 ---
 
-## 👨‍🏫 Docente
+## 👨‍🏫 **Docente**
 **Profa. Carolina Toledo Ferraz**
 
-## 👥 Autores
+## 👥 **Autores**
 - **Bruno Galvão de Oliveira Lima — TIA: 10441285**  
 - **Vitória Ferreira Corrêa — TIA: 10441482**  
 - **Lucas Santos Borba de Araújo — TIA: 10176256**  
@@ -22,106 +22,99 @@
 
 ---
 
-# 📘 Resumo
+# 📘 **Resumo**
 
-Este projeto desenvolve um sistema de recomendação de cursos online baseado no *Udemy Course Recommendation Dataset* (Kaggle).  
-A solução envolve análise exploratória, preparação de dados, construção de representações textuais e implementação de um recomendador baseado em conteúdo, utilizando **TF-IDF** e **Similaridade do Cosseno**.  
-O projeto contribui com o **ODS 4 — Educação de Qualidade**, oferecendo suporte à personalização de trilhas de aprendizagem.
-
----
-
-# 📑 Sumário
-
-1. [Introdução](#introdução)  
-2. [Referencial Teórico](#referencial-teórico)  
-3. [Metodologia](#metodologia)  
-4. [Resultados (PoC)](#resultados)  
-5. [Referências](#referências)  
-6. [Repositório e Arquivos](#repositório-e-arquivos)
+Este projeto implementa um sistema de recomendação de cursos baseado em conteúdo utilizando o dataset *Udemy Course Recommendation* (Kaggle).  
+A solução combina **TF-IDF** e **Similaridade do Cosseno** para identificar cursos semelhantes e apoiar a personalização de trilhas de aprendizagem, contribuindo diretamente para o **ODS 4 — Educação de Qualidade**.  
+Foram realizadas análise exploratória, preparação dos dados, modelagem e avaliação das pipelines desenvolvidas.
 
 ---
 
-# 1. Introdução
+# 📑 **Sumário**
+1. [Introdução](#1-introdução)  
+2. [Referencial Teórico](#2-referencial-teórico)  
+3. [Metodologia](#3-metodologia)  
+4. [Resultados](#4-resultados)  
+5. [Referências](#5-referências)  
+6. [Repositório e Arquivos](#6-repositório-e-arquivos)
 
-## 1.1 Contexto  
-Plataformas digitais geram excesso de opções, tornando recomendadores essenciais para personalizar experiências — Netflix, YouTube e Amazon já utilizam amplamente esse tipo de sistema.  
-No ensino online, recomendadores ajudam a reduzir dispersão, orientar trilhas e apoiar permanência estudantil, alinhando-se ao **ODS 4**.
+---
 
-## 1.2 Motivação  
-Ambientes como Udemy, Coursera e edX oferecem milhares de cursos. Escolher o conteúdo mais relevante é difícil sem apoio automatizado.  
-O projeto busca facilitar essa jornada e aplicar técnicas práticas de ciência de dados com impacto social.
+# 1. **Introdução**
 
-## 1.3 Justificativa  
-O dataset da Udemy oferece atributos úteis (preço, nível, inscritos, duração, título, assunto), permitindo modelar e avaliar técnicas de recomendação aplicáveis ao e-learning.
+## 1.1 **Contexto**
+Sistemas de recomendação são essenciais para lidar com excesso de informação e personalizar experiências em plataformas digitais. No contexto educacional, essas técnicas ajudam alunos a encontrarem conteúdos relevantes, reduzindo evasão e promovendo aprendizagem contínua.
 
-## 1.4 Objetivos  
-**Geral:** criar e avaliar um sistema de recomendação para cursos online.  
+## 1.2 **Motivação**
+Plataformas como Udemy, Coursera e edX reúnem milhares de cursos. A ausência de direcionamento pode gerar dispersão e escolhas pouco eficientes. Recomendadores atuam como guias personalizados nessa jornada.
+
+## 1.3 **Justificativa**
+O dataset da Udemy contém atributos ricos (preço, nível, inscritos, assunto, duração), permitindo experimentação de abordagens modernas de recomendação aplicáveis ao e-learning.
+
+## 1.4 **Objetivos**
+**Geral:**  
+Construir e avaliar um sistema de recomendação para cursos online, alinhado ao ODS 4.
+
 **Específicos:**  
-- realizar EDA detalhada;  
-- limpar e padronizar dados;  
-- implementar técnicas baseadas em conteúdo;  
-- avaliar pipelines;  
-- fornecer base para extensões futuras (colaborativa/híbrida).
+- realizar EDA;  
+- preparar e padronizar dados;  
+- criar corpora textuais;  
+- desenvolver múltiplas pipelines TF-IDF;  
+- comparar desempenho e selecionar o melhor modelo.
 
 ---
 
-# 2. Referencial Teórico
+# 2. **Referencial Teórico**
 
-Os principais modelos estudados incluem:  
-- **Filtragem colaborativa** (usuário-usuário, item-item) — Sarwar et al.  
-- **Recomendação baseada em conteúdo** — Lops, De Gemmis, Semeraro.  
-- **Sistemas híbridos** — Burke.  
-- Trabalhos brasileiros sobre personalização em ambientes virtuais de aprendizagem — Machado & Silva; Lima & Andrade.
+Baseado em literatura clássica e atual:  
+- **Filtragem colaborativa** — *Sarwar et al., 2001*  
+- **Baseado em conteúdo** — *Lops, De Gemmis, Semeraro, 2011*  
+- **Sistemas híbridos** — *Burke, 2002*  
+- Estudos brasileiros em personalização de aprendizagem — *Machado & Silva, 2020; Lima & Andrade, 2022*
 
-Essas abordagens reforçam o uso de atributos textuais, interações e metadados para identificar itens semelhantes.
-
----
-
-# 3. Metodologia
-
-### 🔧 Bibliotecas utilizadas  
-`pandas`, `numpy`, `matplotlib`, `scikit-learn`
-
-### 🔍 Etapas
-- **EDA**  
-  Visualizações de distribuição de preço, duração, nível, assuntos e inscritos.  
-- **Preparação**  
-  • limpeza textual  
-  • normalização  
-  • criação de corpus  
-  • exportação do dataset tratado  
-- **Modelagem (PoC)**  
-  TF-IDF + Similaridade do Cosseno para encontrar cursos semelhantes.  
-  Três pipelines foram comparadas:
-  - v1 — título  
-  - v2 — título + assunto  
-  - v3 — título + assunto + nível  
-- **Avaliação**  
-  Métrica utilizada: **pop_score@5** (popularidade média entre os top-5).
+Esses trabalhos sustentam o uso de atributos dos itens e similaridade entre representações vetoriais como base para recomendação.
 
 ---
 
-# 4. Resultados
+# 3. **Metodologia**
 
-A etapa de EDA e a PoC geraram gráficos e arquivos presentes em `/reports/`.  
-Principais entregas:
+### 🔧 **Ferramentas**
+`Python`, `pandas`, `numpy`, `matplotlib`, `scikit-learn`
 
-- Dataset tratado: `udemy_courses_clean.csv`  
-- Ranking das pipelines: `ranking_pipelines.csv`  
-- Pipeline vencedora salva em: `models/best_pipeline.pkl`  
-- Exemplo de recomendação para *python*: `exemplo_recomendacao_python.csv`  
-- Figuras da análise exploratória em `/reports/eda/`  
-- Figura de desempenho das pipelines em `/reports/poc/`  
-
-A pipeline **v3 (título + assunto + nível)** apresentou o melhor desempenho.
+### 🔍 **Etapas**
+- **EDA**: distribuição de preço, duração, níveis, inscrições, assuntos.  
+- **Preparação**: normalização textual e geração do dataset limpo.  
+- **Modelagem**: construção de três pipelines TF-IDF:  
+  - **v1:** título  
+  - **v2:** título + assunto  
+  - **v3:** título + assunto + nível  
+- **Avaliação**: uso da métrica **pop_score@5** — média de inscritos entre os 5 cursos recomendados.  
+- **Entrega**: modelo salvo, rankings, recomendações-exemplo e gráficos.
 
 ---
 
-# 5. Referências
+# 4. **Resultados**
+
+Todos os resultados estão disponíveis na pasta `/reports/`.
+
+### **Saídas principais**
+- **Dataset tratado:** `udemy_courses_clean.csv`  
+- **Ranking final das pipelines:** `reports/ranking_pipelines.csv`  
+- **Melhor pipeline salva em:** `models/best_pipeline.pkl`  
+- **Exemplo de recomendação:** `reports/exemplo_recomendacao_python.csv`  
+- **Gráficos de EDA:** `/reports/eda/*.png`  
+- **Gráfico do desempenho das pipelines:** `/reports/poc/desempenho_pipelines_poc.png`
+
+### **Conclusão parcial da PoC**
+A pipeline **v3 (título + assunto + nível)** obteve o melhor desempenho geral segundo a métrica pop_score@5.
+
+---
+
+# 5. **Referências**
 
 - BURKE, R. *Hybrid Recommender Systems: Survey and Experiments*. UMUAI, 2002.  
 - LIMA, R. F.; ANDRADE, P. H. *Algoritmos de Recomendação em Plataformas de Ensino Online*. RBIE, 2022.  
-- LOPS, P.; DE GEMMIS, M.; SEMERARO, G. *Content-Based Recommender Systems*. In: Ricci et al. Springer, 2011.  
+- LOPS, P.; DE GEMMIS, M.; SEMERARO, G. *Content-Based Recommender Systems*. Springer, 2011.  
 - MACHADO, T.; SILVA, L. *Impacto da Personalização em AVAs*. SBIE, 2020.  
 - RESNICK, P.; VARIAN, H. *Recommender Systems*. CACM, 1997.  
 - RICCI, F.; ROKACH, L.; SHAPIRA, B. *Recommender Systems Handbook*. Springer, 2011.  
@@ -129,21 +122,21 @@ A pipeline **v3 (título + assunto + nível)** apresentou o melhor desempenho.
 
 ---
 
-# 6. Repositório e Arquivos
+# 6. **Repositório e Arquivos**
 
-**Repositório:**  
+📁 **Repositório:**  
 https://github.com/galvaodeoliveirab/projeto_aplicado_3
 
-**Notebooks:**  
+📌 **Notebooks:**  
 - `EDA_Udemy.ipynb`  
 - `Preparacao_Udemy.ipynb`  
 - `PoC_Recomendacao_Udemy.ipynb`
 
-**Dados:**  
+📌 **Dados:**  
 - `dataset/udemy_course_data.csv`  
 - `dataset/udemy_courses_clean.csv`
 
-**Modelos e relatórios:**  
+📌 **Modelos e Relatórios:**  
 - `models/best_pipeline.pkl`  
 - `reports/eda/*.png`  
 - `reports/poc/*.png`
